@@ -27,20 +27,29 @@ namespace Examples
             // FindMetaTable("Example_UserType").ToCharArray(MyCSString)
             lua.PushManagedFunction((lua) =>
             {
-                // 1 - stands for 1st passed to function argument
                 IntPtr ptr = lua.GetUserType(1, UserType_Id);
                 if (ptr != IntPtr.Zero)
                 {
-                    GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
-                    string csString = (string)gCHandle.Target;
-                    switch (csString)
+                    string indexingname = lua.GetString(2);
+                    switch (indexingname)
                     {
                         case "Length":
-                            lua.PushNumber(csString.Length);
+                            lua.PushManagedFunction((lua) =>
+                            {
+                                IntPtr ptr = lua.GetUserType(1, UserType_Id);
+                                GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
+                                string csString = (string)gCHandle.Target;
+                                lua.PushNumber(csString.Length);
+                                // return 1 result
+                                return 1;
+                            });
                             break;
                         case "ToCharArray":
                             lua.PushManagedFunction((lua) =>
                             {
+                                IntPtr ptr = lua.GetUserType(1, UserType_Id);
+                                GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
+                                string csString = (string)gCHandle.Target;
                                 lua.CreateTable();
                                 char[] charArray = csString.ToCharArray();
                                 foreach (char character in charArray)
@@ -60,7 +69,7 @@ namespace Examples
                 }
                 else
                 {
-                    Console.WriteLine("zero pointer passed to __index");
+                    Console.WriteLine("nil passed to __index");
                     lua.PushNil();
                 }
                 // function will return 1 result
@@ -80,7 +89,7 @@ namespace Examples
                 }
                 else
                 {
-                    Console.WriteLine("zero pointer passed to __tostring");
+                    Console.WriteLine("nil passed to __tostring");
                     lua.PushNil();
                 }
                 return 1;
@@ -129,7 +138,7 @@ namespace Examples
                 }
                 else
                 {
-                    Console.WriteLine("zero pointer passed to __gc");
+                    Console.WriteLine("nil passed to __gc");
                 }
                 return 0;
             });
