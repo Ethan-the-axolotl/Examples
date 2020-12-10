@@ -14,6 +14,7 @@ namespace Examples
             lua.GetField(-1, "print");
             lua.PushString("Hello World!");
             lua.MCall(1, 0);
+            lua.Pop();
         }
 
         public void Unload(ILua lua)
@@ -22,6 +23,7 @@ namespace Examples
             lua.GetField(-1, "print");
             lua.PushString("Goodbye World!");
             lua.MCall(1, 0);
+            lua.Pop();
         }
     }
 }
