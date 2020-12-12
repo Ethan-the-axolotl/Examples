@@ -55,9 +55,9 @@ namespace Examples
                                 foreach (char character in charArray)
                                 {
                                     lua.PushString(character.ToString());
-                                    lua.Pop();
+                                    lua.RawSet(-2);
                                 }
-                                lua.Pop();
+                                lua.SetTable(-1);
                                 // function will return 1 result
                                 return 1;
                             });
