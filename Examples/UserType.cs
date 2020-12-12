@@ -176,6 +176,11 @@ namespace Examples
             lua.PushNil();
             lua.SetField(-2, "__tostring");
             lua.Pop();
+
+            lua.PushSpecial(SPECIAL_TABLES.SPECIAL_GLOB);
+            lua.PushNil();
+            lua.SetField(-1, "CreateCSString");
+            lua.Pop();
         }
     }
 }
