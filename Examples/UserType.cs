@@ -179,7 +179,7 @@ namespace Examples
 
             lua.PushSpecial(SPECIAL_TABLES.SPECIAL_GLOB);
             lua.PushNil();
-            lua.SetField(-1, "CreateCSString");
+            lua.SetField(-2, "CreateCSString");
             lua.Pop();
         }
     }
