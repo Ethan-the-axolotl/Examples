@@ -49,7 +49,7 @@ namespace Examples
                                 foreach (char character in charArray)
                                 {
                                     lua.PushString(character.ToString());
-                                    lua.SetTable(-1);
+                                    lua.SetTable(-3);
                                 }
                                 return 1;
                             });
