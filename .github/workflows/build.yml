@@ -14,7 +14,7 @@ jobs:
       with:
         dotnet-version: 5.0.100
     - name: Install dependencies
-      run: dotnet restore Template.sln
+      run: dotnet restore Examples.sln
     - name: Install Steam and Garry's Mod Dedicated Server
       run: |
         wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
@@ -52,7 +52,7 @@ jobs:
       with:
         dotnet-version: 5.0.100
     - name: Install dependencies
-      run: dotnet restore Template.sln
+      run: dotnet restore Examples.sln
     - name: Install Steam and Garry's Mod Dedicated Server
       shell: bash
       run: |
@@ -93,7 +93,7 @@ jobs:
       with:
         dotnet-version: 5.0.100
     - name: Install dependencies
-      run: dotnet restore Template.sln
+      run: dotnet restore Examples.sln
     - name: Build Module
       run: dotnet publish Examples.sln --configuration Release --framework net5
     - name: Upload a Build Artifact
