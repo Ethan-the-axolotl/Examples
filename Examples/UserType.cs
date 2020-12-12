@@ -147,7 +147,7 @@ namespace Examples
             lua.PushManagedFunction((lua) =>
             {
                 string csString = lua.GetString(1);
-                GCHandle gCHandle = GCHandle.Alloc(csString);
+                GCHandle gCHandle = GCHandle.Alloc(csString, GCHandleType.Weak);
                 IntPtr ptr = GCHandle.ToIntPtr(gCHandle);
                 lua.PushUserType(ptr, UserType_Id);
                 return 1;
