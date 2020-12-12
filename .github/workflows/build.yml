@@ -100,5 +100,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Template MacOS
-        path: bin/Release/net5/osx-x64/*
+        path: Examples/bin/Release/net5/osx-x64/*
         retention-days: 10
