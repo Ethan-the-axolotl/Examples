@@ -23,8 +23,7 @@ local function run_test()
 	print(utf8cs)
 	print(utf8cs.Length)
 
-	print(type(ms:ToCharArray()))
-	print(ms:ToCharArray())
+	PrintTable(ms:ToCharArray())
 
 	-----------------------
 
