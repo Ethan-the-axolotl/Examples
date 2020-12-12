@@ -25,6 +25,12 @@ local function run_test()
 
 	PrintTable(ms:ToCharArray())
 
+	-- garbage collection messages
+
+	local gc_test = CreateCSString("Garbage Collector Test")
+	print(gc_test)
+	gc_test = nil
+
 	-----------------------
 
 	local module_unloaded = dotnet.unload("Examples")

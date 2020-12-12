@@ -4,6 +4,10 @@ using System.Runtime.InteropServices;
 
 namespace Examples
 {
+    /// <summary>
+    /// this module wraps c# string to lua
+    /// </summary>
+    /// TODO: rename to csstring?
     public class UserType : IModule
     {
         public string ModuleName => "UserType";
