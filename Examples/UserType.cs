@@ -34,15 +34,9 @@ namespace Examples
                     switch (indexingname)
                     {
                         case "Length":
-                            lua.PushManagedFunction((lua) =>
-                            {
-                                IntPtr ptr = lua.GetUserType(1, UserType_Id);
-                                GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
-                                string csString = (string)gCHandle.Target;
-                                lua.PushNumber(csString.Length);
-                                // return 1 result
-                                return 1;
-                            });
+                            GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
+                            string csString = (string)gCHandle.Target;
+                            lua.PushNumber(csString.Length);
                             break;
                         case "ToCharArray":
                             lua.PushManagedFunction((lua) =>
