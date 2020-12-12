@@ -8,8 +8,21 @@ local function run_test()
 	assert(module_loaded==true)
 
 	-- do your test here --
+	local s = "lol"
+	local utf8s = "Мёнём"
+	local ms = CreateCSString(s)
 
-	
+	assert(string.len(s) == ms.Length)
+
+	print(utf8s)
+	print(string.len(utf8s))
+	print(utf8.len(utf8s))
+
+	local utf8cs = CreateCSString(utf8s)
+	print(utf8cs)
+	print(utf8cs.Length)
+
+	PrintTable(ms:ToCharArray())
 
 	-----------------------
 
