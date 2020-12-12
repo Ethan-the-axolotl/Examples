@@ -46,9 +46,10 @@ namespace Examples
                                 string csString = (string)gCHandle.Target;
                                 lua.CreateTable();
                                 char[] charArray = csString.ToCharArray();
-                                foreach (char character in charArray)
+                                for (int i = 0; i < charArray.Length; i++)
                                 {
-                                    lua.PushString(character.ToString());
+                                    lua.PushNumber(i);
+                                    lua.PushString(charArray[i].ToString());
                                     lua.SetTable(-3);
                                 }
                                 return 1;
