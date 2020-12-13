@@ -25,11 +25,13 @@ local function run_test()
 
 	PrintTable(ms:ToCharArray())
 
-	-- garbage collection messages
+	local csstring = CreateCSString("тестовый текст, блаблабла")
 
-	local gc_test = CreateCSString("Garbage Collector Test")
-	print(gc_test)
-	gc_test = nil
+	print(csstring:IndexOf("блаблабла"))
+	print(csstring:IndexOf(CreateCSString("блаблабла")))
+
+	print(csstring:Contains(","))
+	print(csstring:Contains(CreateCSString(",")))
 
 	-----------------------
 

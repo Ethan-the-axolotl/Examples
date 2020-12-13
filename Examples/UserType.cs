@@ -37,11 +37,13 @@ namespace Examples
                     string indexingname = lua.GetString(2);
                     switch (indexingname)
                     {
+                        // pushing simple number
                         case "Length":
                             GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
                             string csString = (string)gCHandle.Target;
                             lua.PushNumber(csString.Length);
                             break;
+                        // pushing function
                         case "ToCharArray":
                             lua.PushManagedFunction((lua) =>
                             {
@@ -56,6 +58,69 @@ namespace Examples
                                     lua.PushString(charArray[i].ToString());
                                     lua.SetTable(-3);
                                 }
+                                return 1;
+                            });
+                            break;
+                        case "Clone":
+                            lua.PushManagedFunction((lua) =>
+                            {
+                                IntPtr ptr1 = lua.GetUserType(1, UserType_Id);
+                                GCHandle gCHandle1 = GCHandle.FromIntPtr(ptr1);
+                                string csString1 = (string)gCHandle1.Target;
+                                string csString2 = (string)csString1.Clone();
+                                GCHandle gCHandle2 = GCHandle.Alloc(csString2, GCHandleType.Weak);
+                                IntPtr ptr2 = GCHandle.ToIntPtr(gCHandle2);
+                                lua.PushUserType(ptr2, UserType_Id);
+                                return 1;
+                            });
+                            break;
+                        case "IndexOf":
+                            lua.PushManagedFunction((lua) =>
+                            {
+                                IntPtr ptr = lua.GetUserType(1, UserType_Id);
+                                GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
+                                string csString = (string)gCHandle.Target;
+
+                                string toFind;
+                                if (lua.IsType(2, TYPES.STRING))
+                                {
+                                    toFind = lua.GetString(2);
+                                }
+                                else if (lua.IsType(2, UserType_Id))
+                                {
+                                    IntPtr ptr2 = lua.GetUserType(2, UserType_Id);
+                                    GCHandle gCHandle2 = GCHandle.FromIntPtr(ptr2);
+                                    toFind = (string)gCHandle2.Target;
+                                }
+                                else return 0;
+
+                                int indexOf = csString.IndexOf(toFind);
+                                lua.PushNumber(indexOf);
+                                return 1;
+                            });
+                            break;
+                        case "Contains":
+                            lua.PushManagedFunction((lua) =>
+                            {
+                                IntPtr ptr = lua.GetUserType(1, UserType_Id);
+                                GCHandle gCHandle = GCHandle.FromIntPtr(ptr);
+                                string csString = (string)gCHandle.Target;
+
+                                string toFind;
+                                if (lua.IsType(2, TYPES.STRING))
+                                {
+                                    toFind = lua.GetString(2);
+                                }
+                                else if (lua.IsType(2, UserType_Id))
+                                {
+                                    IntPtr ptr2 = lua.GetUserType(2, UserType_Id);
+                                    GCHandle gCHandle2 = GCHandle.FromIntPtr(ptr2);
+                                    toFind = (string)gCHandle2.Target;
+                                }
+                                else return 0;
+
+                                bool contains = csString.Contains(toFind);
+                                lua.PushBool(contains);
                                 return 1;
                             });
                             break;
