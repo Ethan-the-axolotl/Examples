@@ -27,7 +27,7 @@ local function run_test()
 
 	local csstring = CreateCSString("тестовый текст, блаблабла")
 	local blablabla = "блаблабла"
-	print(string.find(csstring, blablabla))
+	print(string.find(tostring(csstring), blablabla))
 	print(csstring:IndexOf(CreateCSString(blablabla)))
 	assert(csstring:IndexOf(CreateCSString(blablabla)) == csstring:IndexOf(blablabla))
 
