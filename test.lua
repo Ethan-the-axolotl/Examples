@@ -29,8 +29,7 @@ local function run_test()
 	local blablabla = "блаблабла"
 	assert(csstring:IndexOf(CreateCSString(blablabla)) == csstring:IndexOf(blablabla))
 
-	print(csstring:Contains(","))
-	print(csstring:Contains(CreateCSString(",")))
+	assert(csstring:Contains(",")==csstring:Contains(CreateCSString(","))==true)
 
 	-----------------------
 
