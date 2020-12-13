@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GmodNET.API" Version="[0.7.0-beta.2.28828564.master]" />
+    <PackageReference Include="GmodNET.API" Version="[0.7.0-beta.2.29965282.master]" />
   </ItemGroup>
 
 </Project>
