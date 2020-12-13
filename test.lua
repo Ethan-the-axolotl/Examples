@@ -26,9 +26,10 @@ local function run_test()
 	PrintTable(ms:ToCharArray())
 
 	local csstring = CreateCSString("тестовый текст, блаблабла")
-
-	print(csstring:IndexOf("блаблабла"))
-	print(csstring:IndexOf(CreateCSString("блаблабла")))
+	local blablabla = "блаблабла"
+	print(string.find(csstring, blablabla))
+	print(csstring:IndexOf(CreateCSString(blablabla)))
+	assert(csstring:IndexOf(CreateCSString(blablabla)) == csstring:IndexOf(blablabla))
 
 	print(csstring:Contains(","))
 	print(csstring:Contains(CreateCSString(",")))
